@@ -3,7 +3,7 @@ layout: post
 title: Upgrading your codebase and staying fresh
 ---
 
-In the first part of the mini-series (1/2) dealing with upgrading code, libaries or tools we will go over the process of upgrading your whole codebase from a general point of view, applicable to any kind of language or framework. We will discuss how to get ready for it, persuade others and what you might encounter on this journey. I will provide you with arguments, why I believe that upgrading should be a continuous process, which can reduce costs in the long run. In the second part we will take a closer look into upgrading app from  Rails 3 to Rails 4, and what to expect from Rails 5.
+In the first part of the mini-series (1/2) dealing with upgrading code, libraries or tools we will go over the process of upgrading your whole codebase from a general point of view, applicable to any kind of language or framework. We will discuss how to get ready for it, persuade others and what you might encounter on this journey. I will provide you with arguments, why I believe that upgrading should be a continuous process, which can reduce costs in the long run. In the second part we will take a closer look into upgrading app from  Rails 3 to Rails 4, and what to expect from Rails 5.
 
 ### Reasons to upgrade or why to upgrade?
 The reasons that you want to upgrade your codebase to the latest versions of your language or framework - there are plenty of them. Maybe you would like to try out the new feature of your language/tool - websockets, lambda expressions (java 8), native json support ([mysql](https://dev.mysql.com/doc/refman/5.7/en/json.html)), fix slow performance, improve the security .. or you just want to be ready for the future.
