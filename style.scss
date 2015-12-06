@@ -284,6 +284,27 @@ footer {
   text-align: center;
 }
 
+img {
+   display: block;
+    margin: 0 auto;
+}
+
+.fb-share-button{
+  position: relative;
+    top: -6px;
+}
+
+.share-buttons{
+  margin-top:10px;
+}
+.reddit{
+    position: relative;
+    top: 2px;
+}
+.hackernews{
+  position: relative;
+    top: 1px;
+}
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";

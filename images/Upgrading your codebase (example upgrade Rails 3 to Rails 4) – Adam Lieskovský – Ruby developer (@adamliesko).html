@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://localhost:4000/Upgrading-Rails/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)</title>
+
+        <meta charset="utf-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    
+    <meta name="description" content="In this article we will go over the process of upgrading your whole codebase - first from a general point of view, applicable to any kind of language or framework. Secondly, we will focus on ugprade from Rails 3 to the Rails 4. At the end we will look a little into the future, considering the release of Rails 5.
+">
+    <meta property="og:description" content="In this article we will go over the process of upgrading your whole codebase - first from a general point of view, applicable to any kind of language or framework. Secondly, we will focus on ugprade from Rails 3 to the Rails 4. At the end we will look a little into the future, considering the release of Rails 5.
+">
+    
+    <meta name="author" content="Adam Lieskovský">
+
+    
+    <meta property="og:title" content="Upgrading your codebase (example upgrade Rails 3 to Rails 4)">
+    <meta property="twitter:title" content="Upgrading your codebase (example upgrade Rails 3 to Rails 4)">
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Adam Lieskovský - Ruby developer (@adamliesko)" href="http://localhost:4000/feed.xml">
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  <script async="" src="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/analytics.js"></script><script type="text/javascript" async="" src="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/embed.js"></script><style type="text/css"></style></head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="http://localhost:4000/" class="site-avatar"><img src="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/1286236"></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="http://localhost:4000/">Adam Lieskovský</a></h1>
+            <p class="site-description">Ruby developer (@adamliesko)</p>
+          </div>
+
+          <nav>
+            <a href="http://localhost:4000/">Blog</a>
+            <a href="http://localhost:4000/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h2>Upgrading your codebase (example upgrade Rails 3 to Rails 4)</h2>
+
+  <div class="entry">
+    <p>In this article we will go over the process of upgrading your whole codebase - first from a general point of view, applicable to any kind of language or framework. Secondly, we will focus on ugprade from Rails 3 to the Rails 4. At the end we will look a little into the future, considering the release of Rails 5.</p>
+
+<h3 id="reasons-to-upgrade">Reasons to upgrade</h3>
+
+<p>The reasons that you want to upgrade your codebase to the latest versions of your language or framework - there are plenty of them. Maybe you would like to try out the new feature of your language/tool - websockets, lambda expressions (java 8), native json support (<a href="https://dev.mysql.com/doc/refman/5.7/en/json.html">mysql</a>). Fix slow performance, improve the security .. or you just want to be ready for the future.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">isOdd</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">;</span>
+</code></pre></div>
+<p>On a second thought, why break something that works? This might be the question that probably your management or some conservative peers will ask you. Every upgrade brings in a certain risk - is the release really stable?, breaking compatibilities between your dependencies. You are bringing new equipment into the battle, which flaws you might only discover in your specific production environment (the luckier ones on staging/QA). Well on the first sight, they do have a point - if your app is something where you are not expecting any major changes to be made, then there really might be no reason to do this. But think about situations like major security vulnerabilities in your language  and .. Oops! your 3 years old version is no longer supported and the fix won't be backported. What about if Heroku decides to stop supporting certain versions .. you wanted to upgrade a simple footer text, but now you are out of luck. So ..</p>
+
+<p><img src="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/upgrade_update_sw_dilbert.jpg" alt="_config.yml">(dilbert.com)</p>
+
+<h3 id="how-to-sell-this-to-your-team">How to sell this to your team?</h3>
+
+<p>I don't believe you would have a hard time persuading the developers withing your team with the upgrade. Majority of us trully want to explore the latest cutting-edge technologies and features - and benefit from them. We want to make our lives easier and we are happy to dedicate a bit of time to a admitably little bit daunting task of refactoring. Bigger obstacle would be the management - if you have any. Sooner or later, they have to realize that refactoring is essential part of the development process.</p>
+
+<h3 id="what-you-might-gain">What you might gain?</h3>
+
+<p>Now let's take a more detailed look onto the benefits that upgrade can bring. Let's suppose we are upgrading a whole codebase, and not only some component like a database version in here.</p>
+
+<h4 id="1-easier-upgrades-in-the-future">1. Easier upgrades in the future</h4>
+
+<h4 id="2-performance-boost">2. Performance boost</h4>
+
+<h4 id="3-security-fixes-and-patches">3. Security fixes and patches</h4>
+
+<p>232332</p>
+
+<h3 id="what-to-expect-on-this-journey-and-how-to-prepare">What to expect on this journey and how to prepare?</h3>
+
+<h3 id="upgrading-rails-project-specific-personal-experience">Upgrading Rails (project specific personal experience)</h3>
+
+<h3 id="rails-5-what-can-you-expect">Rails 5 - what can you expect?</h3>
+
+<p>write test
+even without domain knowledge, legacy app
+no tests - you are screwed app, qa is gonna hate you</p>
+
+<p>be sure against which brnach</p>
+
+<p>this is a long process</p>
+
+<p>During the August our team finally decided ...</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">print</span> <span class="mi">3</span>
+<span class="k">def</span> <span class="nf">adam</span>
+    <span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">?</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="kp">false</span>
+<span class="k">end</span>
+</code></pre></div>
+<p><img src="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/adam_karate_uni_ba.png" alt="_config.yml"></p>
+
+  </div>
+
+  <div class="date">
+    Written on September 20, 2015
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Upgrading your codebase (example upgrade Rails 3 to Rails 4) – Adam Lieskovský – Ruby developer (@adamliesko)_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 321px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="indicator-north" name="indicator-north" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 720px !important; border: none !important; overflow: hidden !important; top: 0px !important; min-width: 720px !important; max-width: 720px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important;"></iframe><iframe id="indicator-south" name="indicator-south" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 720px !important; border: none !important; overflow: hidden !important; bottom: 0px !important; min-width: 720px !important; max-width: 720px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important;"></iframe></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'lieskovsky';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+</div>
+
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:adamliesko@gmail.com"><i class="svg-icon email"></i></a>
+<a href="https://www.facebook.com/adamliesko"><i class="svg-icon facebook"></i></a>
+
+<a href="https://github.com/adamliesko"><i class="svg-icon github"></i></a>
+
+<a href="https://www.linkedin.com/in/adamliesko"><i class="svg-icon linkedin"></i></a>
+
+
+<a href="https://www.twitter.com/adamliesko"><i class="svg-icon twitter"></i></a>
+<a href="http://stackoverflow.com/users/1212336/adamliesko"><i class="svg-icon stackoverflow"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-62566982-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/Upgrading-Rails/',
+		  'title': 'Upgrading your codebase (example upgrade Rails 3 to Rails 4)'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  
+
+</body></html>
