@@ -3,7 +3,7 @@ layout: post
 title: Upgrading your codebase and staying fresh
 ---
 
-In the first part of the mini-series (1/2) dealing with upgrading code, libraries or tools we will go over the process of upgrading your whole codebase from a general point of view, applicable to any kind of language or framework. We will discuss how to get ready for it, persuade others and what you might encounter on this journey. I will provide you with arguments, why I believe that upgrading should be a continuous process, which can reduce costs in the long run. In the second part we will take a closer look into upgrading app from  Rails 3 to Rails 4, and what to expect from Rails 5.
+We will go over the process of upgrading your whole codebase from a general point of view, applicable to any kind of language or framework. We will discuss how to get ready for it, persuade others and what you might encounter on this journey. I will provide you with arguments, why I believe that upgrading should be a continuous process, which can reduce costs in the long run.
 
 ### Reasons to upgrade or why to upgrade?
 The reasons that you want to upgrade your codebase to the latest versions of your language or framework - there are plenty of them. Maybe you would like to try out the new feature of your language/tool - websockets, lambda expressions (java 8), native json support ([mysql](https://dev.mysql.com/doc/refman/5.7/en/json.html)), fix slow performance, improve the security .. or you just want to be ready for the future.
@@ -50,14 +50,14 @@ This might be the most underestimated point. Teams' budgets are tight and common
 user = User.first
 
 if user && user.profile
-puts "User: #{user.profile.nickname}"
+    puts "User: #{user.profile.nickname}"
 end
 
 # Ruby 2.3.0
 user = User.first
 
 if user&.profile
-puts "User: #{user.profile.nickname}"
+    puts "User: #{user.profile.nickname}"
 end
 ```
 New versions bring new features and enhancements. This adds to the developer comfort and hapiness.
@@ -92,6 +92,4 @@ And what about the continuity of the upgrade process?
 > (Donald Knuth)
 
 You might find yourself thinking about this continuity like .. wait, isn't this an instance of *premature optimization* pehonemnon? Well, you might be totally right! But please, do keep an eye on the new versions of the tools you are using and listen to your developers.
-
-In the second part of this mini-series, we will be going through an upgrade of Rails Application, and we will take a look into what will Rails 5 bring to the table.
 
