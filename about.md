@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 Welcome! I am eager Software Engineer (github: [@adamliesko](http://www.github.com/adamliesko)), located currently in the lakeside [Zurich, Switzerland](https://en.wikipedia.org/wiki/Zurich), originally from [Slovakia](https://en.wikipedia.org/wiki/Slovakia). 
-Preferring backend development and enjoying Ruby/Rails the most, while Go (Golang) is catching up quickly. 
+Preferring backend development and enjoying Ruby/Rails and Go the most.
 I am developing backend platform for [Centralway Numbrs](https://www.centralway.com), disrupting the old and tedious banking world on European markets. Numbrs is #1 financial app in German App Store.
 Previously, I crafted exciting biometrics solutions at [Innovatrics](http://www.innovatrics.com/), where we were doing thrilling stuff ([face verification](http://www.innovatrics.com/products/iface-sdk), [fingerprint matching](http://www.nist.gov/itl/iad/ig/minexiii.cfm)) on scales of multiple millions of records, powering national elections, border controls or ID issuance processes.
 
@@ -19,7 +19,7 @@ Apart from pure software development, I am interested in machine learning (recom
 ### Karate (and sport)
 ![_config.yml]({{ site.baseurl }}/images/adam_karate_uni_ba.jpg)
 
-I have spent a great deal of my youth practising and competing in WKF karate at the highest level - World Championships. I hold 1st dan (black-belt) and in 2012 I have won [3rd place at World University Championships](http://www.fisu.net/en/8th-World-University-Karate-Championship-in-Bratislava-Opened-3133.html?mbID=4722) in male senior kumite category. Thanks to karate, I have had few bones broken, ripped some ligaments (2x ACL) here and there (not necessarily mine). Nevertheless, I have travelled around the world, gained self-discipline, ability to push myself over the edge and respect others. These days I favor skiing and mountain-biking.
+I have spent a great deal of my youth practising and competing in WKF karate at the highest level - World Championships. I hold 1st dan (black-belt) and in 2012 I won [3rd place at World University Championships](http://www.fisu.net/en/8th-World-University-Karate-Championship-in-Bratislava-Opened-3133.html?mbID=4722) in male senior kumite category. Thanks to karate, I have had few bones broken, ripped some ligaments (2x ACL) here and there (not necessarily mine). Nevertheless, I have travelled around the world, gained self-discipline, ability to push myself over the edge and respect others. These days I favor skiing and mountain-biking.
 
 ### Resume
 
